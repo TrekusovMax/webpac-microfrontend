@@ -1,4 +1,5 @@
 const HTMLWebpackPlugin = require('html-webpack-plugin')
+const { ModuleFederationPlugin } = require('webpack').container
 const path = require('path')
 
 module.exports = {
@@ -25,6 +26,24 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: './public/index.html',
+    }),
+    new ModuleFederationPlugin({
+      name: 'project',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './App': './src/App',
+        './utils/sum': './src/utils/sum',
+      },
+      shared: {
+        react: {
+          singleton: true,
+          eager: true,
+        },
+        'react-dom': {
+          singleton: true,
+          eager: true,
+        },
+      },
     }),
   ],
   resolve: {

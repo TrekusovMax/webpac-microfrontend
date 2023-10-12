@@ -1,14 +1,16 @@
 import React from 'react'
+import { sum } from './utils/sum'
 
 const App = () => {
   return (
     <div
       style={{
-        background: 'green',
+        background: 'blue',
         padding: '20px',
         textAlign: 'center',
       }}>
-      App 2
+      <h1>App 2</h1>
+      {sum(5, 5)}
     </div>
   )
 }
